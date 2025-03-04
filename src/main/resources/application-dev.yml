@@ -1,0 +1,47 @@
+server:
+  port: 8888  # Config Server 포트
+
+eureka:
+  client:
+    region: ap-northeast-2
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/  # Eureka 서버 주소
+    register-with-eureka: true   # Eureka에 등록
+    fetch-registry: true         # 다른 서비스 목록 가져오기
+
+spring:
+  application:
+    name: config-server  # 서비스 이름
+
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/JuseungL/Config-Server-Test.git
+          username: JuseungL
+          password:
+          clone-on-start: true
+          search-paths:
+            - member-service
+            - store-service
+            - gateway
+          default-label: main
+
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: guest
+    password: guest
+
+
+management:
+  endpoints:
+    web:
+      base-path: /api/v1/config  # 기본 엔드포인트 경로 변경
+      exposure:
+        include: refresh, health, beans, httptrace, busrefresh
+  endpoint:
+    health:
+      show-details: always
+    bus-refresh:
+      enabled: true

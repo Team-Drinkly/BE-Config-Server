@@ -27,13 +27,13 @@ dependencies {
 
     // Spring Cloud Config Server (Config 서버 기능 제공)
     implementation 'org.springframework.cloud:spring-cloud-config-server'
-    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
 
     // Spring Cloud Bus (RabbitMQ와 연동하여 설정 변경 전파)
     implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
 
     // Eureka Client (Config Server도 Eureka에 등록 가능)
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.cloud:spring-cloud-config-monitor'
 
     // Actuator (Config Server 상태 확인 및 `/actuator/refresh` 지원)
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
@@ -50,4 +50,10 @@ dependencyManagement {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+bootJar {
+    archivesBaseName = 'config-server'
+    archiveFileName = 'config-server.jar'
+    archiveVersion = "0.0.1"
 }
