@@ -19,12 +19,14 @@ spring:
         git:
           uri: https://github.com/JuseungL/Config-Server-Test.git
           username: JuseungL
-          password:
+          password: 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
           clone-on-start: true
           search-paths:
             - member-service
             - store-service
+            - coupon-service
             - gateway
+            - payment-service
           default-label: main
 
   rabbitmq:
